@@ -39,6 +39,7 @@ option (WITH_GTEST "Use Google Test" ON)
 option (WITH_PKGCONFIG "Enable pkg-config support" OFF)
 option (WITH_SYMBOLIZE "Enable symbolize module" ON)
 option (WITH_TLS "Enable Thread Local Storage (TLS) support" ON)
+option (SKIP_INSTALL "Do not install anything" OFF)
 
 set (WITH_UNWIND libunwind CACHE STRING "unwind driver")
 set_property (CACHE WITH_UNWIND PROPERTY STRINGS none unwind libunwind)
@@ -959,6 +960,10 @@ if (BUILD_TESTING)
     PASS_REGULAR_EXPRESSION ""
   )
 endif (BUILD_TESTING)
+
+if (SKIP_INSTALL)
+  return()
+endif()
 
 install (TARGETS glog
   EXPORT glog-targets
